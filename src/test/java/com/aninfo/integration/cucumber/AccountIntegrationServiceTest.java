@@ -2,6 +2,7 @@ package com.aninfo.integration.cucumber;
 
 import com.aninfo.Memo1BankApp;
 import com.aninfo.model.Account;
+import com.aninfo.model.Descuento;
 import com.aninfo.model.Transaccion;
 import com.aninfo.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,6 @@ public class AccountIntegrationServiceTest {
         return accountService.createAccount(new Account(balance));
     }
 
-    /*Account withdraw(Account account, Double sum) {
-        return accountService.withdraw(account.getCbu(), sum);
-    }*/
     Account withdraw(Account account, Transaccion transaccion) {
         return accountService.withdraw(account.getCbu(), transaccion);
     }

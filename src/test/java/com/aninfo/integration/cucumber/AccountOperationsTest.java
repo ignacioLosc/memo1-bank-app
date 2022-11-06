@@ -3,6 +3,7 @@ package com.aninfo.integration.cucumber;
 import com.aninfo.exceptions.DepositNegativeSumException;
 import com.aninfo.exceptions.InsufficientFundsException;
 import com.aninfo.model.Account;
+import com.aninfo.model.Descuento;
 import com.aninfo.model.Transaccion;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -28,6 +29,12 @@ public class AccountOperationsTest extends AccountIntegrationServiceTest {
     @Given("^Account with a balance of (\\d+)$")
     public void account_with_a_balance_of(int balance)  {
         account = createAccount(Double.valueOf(balance));
+    }
+
+    @Given("^Bank account promo is active$")
+    public void account_promo_is_active()  {
+        //account.agregarDescuento(new Descuento(10));
+        accountService.agregarDescuento(account.getCbu(), new Descuento(Double.valueOf(10)));
     }
 
     @When("^Trying to withdraw (\\d+)$")

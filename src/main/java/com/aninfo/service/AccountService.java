@@ -3,6 +3,7 @@ package com.aninfo.service;
 import com.aninfo.exceptions.DepositNegativeSumException;
 import com.aninfo.exceptions.InsufficientFundsException;
 import com.aninfo.model.Account;
+import com.aninfo.model.Descuento;
 import com.aninfo.model.Transaccion;
 import com.aninfo.repository.AccountRepository;
 import com.aninfo.repository.TransaccionRepository;
@@ -49,7 +50,8 @@ public class AccountService {
             throw new InsufficientFundsException("Insufficient funds");
         }
         //Transaccion transaccion = new Transaccion(sum);
-        account.setBalance(account.getBalance() - transaccion.getMonto());
+        //account.setBalance(account.getBalance() - transaccion.getMonto());
+        account.extraer(transaccion.getMonto());
         accountRepository.save(account);
         transaccion.setCbu(account.getCbu());
         transaccion.setTipo("Extracción");
@@ -66,7 +68,8 @@ public class AccountService {
         }
 
         Account account = accountRepository.findAccountByCbu(cbu);
-        account.setBalance(account.getBalance() + transaccion.getMonto());
+        //account.setBalance(account.getBalance() + transaccion.getMonto());
+        account.depositar(transaccion.getMonto());
         accountRepository.save(account);
         transaccion.setCbu(account.getCbu());
         transaccion.setTipo("Depósito");
@@ -87,4 +90,9 @@ public class AccountService {
         return transaccionRepository.findAllByCbu(cbu);
     }
 
+    public void agregarDescuento(Long cbu, Descuento descuento) {
+        Account account = accountRepository.findAccountByCbu(cbu);
+        account.agregarDescuento(descuento);
+        accountRepository.save(account);
+    }
 }
