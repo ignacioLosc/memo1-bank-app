@@ -78,18 +78,18 @@ public class Memo1BankApp {
 
 	@GetMapping("/transaccion/{id}")
 	public ResponseEntity<Transaccion> getTransaccion(@PathVariable Long id) {
-		Optional<Transaccion> transaccionOpcional = accountService.EncontrarById(id);
+		Optional<Transaccion> transaccionOpcional = accountService.EncontrarTransaccionPorId(id);
 		return ResponseEntity.of(transaccionOpcional);
 	}
 
 	@GetMapping("/accounts/{cbu}/transacciones")
 	public Collection<Transaccion> getTransacciones(@PathVariable Long cbu) {
-		return accountService.EncontrarByCbu(cbu);
+		return accountService.EncontrarTransaccionPorCbu(cbu);
 	}
 
 	@DeleteMapping("/transaccion/{id}")
 	public void borrarTransaccion(@PathVariable Long id) {
-		accountService.borrarById(id);
+		accountService.borrarTransaccionPorId(id);
 	}
 
 	@Bean

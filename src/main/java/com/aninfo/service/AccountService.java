@@ -75,15 +75,15 @@ public class AccountService {
         return account;
     }
 
-    public void borrarById(Long id) {
+    public void borrarTransaccionPorId(Long id) {
         transaccionRepository.deleteById(id);
     }
 
-    public Optional<Transaccion> EncontrarById(Long id) {
+    public Optional<Transaccion> EncontrarTransaccionPorId(Long id) {
         return transaccionRepository.findById(id);
     }
 
-    public Collection<Transaccion> EncontrarByCbu(Long cbu) {
+    public Collection<Transaccion> EncontrarTransaccionPorCbu(Long cbu) {
         return transaccionRepository.findAllByCbu(cbu);
     }
 
