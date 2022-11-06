@@ -3,6 +3,7 @@ package com.aninfo.integration.cucumber;
 import com.aninfo.exceptions.DepositNegativeSumException;
 import com.aninfo.exceptions.InsufficientFundsException;
 import com.aninfo.model.Account;
+import com.aninfo.model.Transaccion;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
@@ -32,7 +33,8 @@ public class AccountOperationsTest extends AccountIntegrationServiceTest {
     @When("^Trying to withdraw (\\d+)$")
     public void trying_to_withdraw(int sum) {
         try {
-            account = withdraw(account, Double.valueOf(sum));
+            //account = withdraw(account, Double.valueOf(sum));
+            account = withdraw(account, new Transaccion(Double.valueOf(sum)));
         } catch (InsufficientFundsException ife) {
             this.ife = ife;
         }
@@ -41,7 +43,7 @@ public class AccountOperationsTest extends AccountIntegrationServiceTest {
     @When("^Trying to deposit (.*)$")
     public void trying_to_deposit(int sum) {
         try {
-            account = deposit(account, Double.valueOf(sum));
+            account = deposit(account, new Transaccion(Double.valueOf(sum)));
         } catch (DepositNegativeSumException dnse) {
             this.dnse = dnse;
         }

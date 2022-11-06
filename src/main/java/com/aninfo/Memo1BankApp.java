@@ -1,6 +1,7 @@
 package com.aninfo;
 
 import com.aninfo.model.Account;
+import com.aninfo.model.Transaccion;
 import com.aninfo.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -65,14 +66,28 @@ public class Memo1BankApp {
 		accountService.deleteById(cbu);
 	}
 
-	@PutMapping("/accounts/{cbu}/withdraw")
-	public Account withdraw(@PathVariable Long cbu, @RequestParam Double sum) {
-		return accountService.withdraw(cbu, sum);
+	@PostMapping("/accounts/{cbu}/withdraw")
+	//@ResponseStatus(HttpStatus.OK)
+	public Account withdraw(@PathVariable Long cbu, @RequestBody Transaccion transaccion) {
+		return accountService.withdraw(cbu, transaccion);
 	}
 
-	@PutMapping("/accounts/{cbu}/deposit")
-	public Account deposit(@PathVariable Long cbu, @RequestParam Double sum) {
-		return accountService.deposit(cbu, sum);
+	@PostMapping("/accounts/{cbu}/deposit")
+	//@ResponseStatus(HttpStatus.OK)
+	public Account deposit(@PathVariable Long cbu, @RequestBody Transaccion transaccion) {
+		return accountService.deposit(cbu, transaccion);
+	}
+
+	@GetMapping("/transaccion/{id}")
+	public ResponseEntity<Transaccion> getTransaccion(@PathVariable Long id) {
+		Optional<Transaccion> transaccionOpcional = accountService.EncontrarById(id);
+		return ResponseEntity.of(transaccionOpcional);
+	}
+
+	@GetMapping("/accounts/{cbu}/transacciones")
+	public Collection<Transaccion> getTransacciones(@PathVariable Long cbu) {
+		Collection<Transaccion> transacciones = accountService.EncontrarByCbu(cbu);
+		return transacciones;
 	}
 
 	@Bean
