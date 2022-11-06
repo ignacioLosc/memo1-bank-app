@@ -86,8 +86,12 @@ public class Memo1BankApp {
 
 	@GetMapping("/accounts/{cbu}/transacciones")
 	public Collection<Transaccion> getTransacciones(@PathVariable Long cbu) {
-		Collection<Transaccion> transacciones = accountService.EncontrarByCbu(cbu);
-		return transacciones;
+		return accountService.EncontrarByCbu(cbu);
+	}
+
+	@DeleteMapping("/transaccion/{id}")
+	public void borrarTransaccion(@PathVariable Long id) {
+		accountService.borrarById(id);
 	}
 
 	@Bean

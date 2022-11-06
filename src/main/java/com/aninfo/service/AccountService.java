@@ -75,6 +75,10 @@ public class AccountService {
         return account;
     }
 
+    public void borrarById(Long id) {
+        transaccionRepository.deleteById(id);
+    }
+
     public Optional<Transaccion> EncontrarById(Long id) {
         return transaccionRepository.findById(id);
     }
