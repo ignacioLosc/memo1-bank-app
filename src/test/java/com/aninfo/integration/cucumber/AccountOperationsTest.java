@@ -33,14 +33,12 @@ public class AccountOperationsTest extends AccountIntegrationServiceTest {
 
     @Given("^Bank account promo is active$")
     public void account_promo_is_active()  {
-        //account.agregarDescuento(new Descuento(10));
         accountService.agregarDescuento(account.getCbu(), new Descuento(Double.valueOf(10)));
     }
 
     @When("^Trying to withdraw (\\d+)$")
     public void trying_to_withdraw(int sum) {
         try {
-            //account = withdraw(account, Double.valueOf(sum));
             account = withdraw(account, new Transaccion(Double.valueOf(sum)));
         } catch (InsufficientFundsException ife) {
             this.ife = ife;

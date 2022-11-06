@@ -67,13 +67,11 @@ public class Memo1BankApp {
 	}
 
 	@PostMapping("/accounts/{cbu}/withdraw")
-	//@ResponseStatus(HttpStatus.OK)
 	public Account withdraw(@PathVariable Long cbu, @RequestBody Transaccion transaccion) {
 		return accountService.withdraw(cbu, transaccion);
 	}
 
 	@PostMapping("/accounts/{cbu}/deposit")
-	//@ResponseStatus(HttpStatus.OK)
 	public Account deposit(@PathVariable Long cbu, @RequestBody Transaccion transaccion) {
 		return accountService.deposit(cbu, transaccion);
 	}

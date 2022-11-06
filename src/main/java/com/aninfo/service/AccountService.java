@@ -49,8 +49,6 @@ public class AccountService {
         if (account.getBalance() < transaccion.getMonto()) {
             throw new InsufficientFundsException("Insufficient funds");
         }
-        //Transaccion transaccion = new Transaccion(sum);
-        //account.setBalance(account.getBalance() - transaccion.getMonto());
         account.extraer(transaccion.getMonto());
         accountRepository.save(account);
         transaccion.setCbu(account.getCbu());
@@ -68,7 +66,6 @@ public class AccountService {
         }
 
         Account account = accountRepository.findAccountByCbu(cbu);
-        //account.setBalance(account.getBalance() + transaccion.getMonto());
         account.depositar(transaccion.getMonto());
         accountRepository.save(account);
         transaccion.setCbu(account.getCbu());
